@@ -434,3 +434,80 @@ void totalPortfolioValue(Crypto coins[],
     cout << "Total Portfolio Value: $"
          << total
          << endl;
+int main()
+{
+    Crypto coins[100];
+
+    int x = 0;
+
+    int choice;
+
+    do
+    {
+        cout << endl;
+
+        cout << " CRYPTO FUTURES"
+             << endl;
+
+        cout << "1. Add Coin"
+             << endl;
+
+        cout << "2. View Portfolio"
+             << endl;
+
+        cout << "3. Search Coin"
+             << endl;
+
+        cout << "4. Delete Coin"
+             << endl;
+
+        cout << "5. Total Portfolio Value"
+             << endl;
+
+        cout << "6. Exit"
+             << endl;
+
+        cout << endl;
+
+        cout << "Enter Your Choice: ";
+
+        cin >> choice;
+
+        if(choice == 1)
+        {
+            addCoin(coins, x);
+        }
+        else if(choice == 2)
+        {
+            viewPortfolio(coins, x);
+        }
+        else if(choice == 3)
+        {
+            searchCoin(coins, x);
+        }
+        else if(choice == 4)
+        {
+            deleteCoin(coins, x);
+        }
+        else if(choice == 5)
+        {
+            totalPortfolioValue(coins, x);
+        }
+        else if(choice == 6)
+        {
+            cout << endl;
+            cout << "Exiting Program..."
+                 << endl;
+        }
+        else
+        {
+            cout << endl;
+            cout << "Invalid Choice!"
+                 << endl;
+        }
+
+    }
+    while(choice != 6);
+
+    return 0;
+}
