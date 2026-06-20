@@ -68,122 +68,132 @@ void addCoin(Crypto *coins, int &x)
 }
 
 
-//function to search and delete coin
-void searchCoin(Crypto *coins, int x)
+//function to view port folio 
+void viewPortfolio(Crypto *coins, int x)
 {
-    string searchName;
-
-    bool found = false;
+    if(x == 0)
+    {
+        cout << endl;
+        cout << "Portfolio is Empty!"
+             << endl;
+        return;
+    }
 
     cout << endl;
-    cout << "Enter Coin Name to Search: ";
-
-    cin >> searchName;
+    cout << "PORTFOLIO "
+         << endl;
 
     for(int i = 0; i < x; i++)
     {
-        if(coins[i].name == searchName)
+        float pnl;
+        float pnlPercent;
+        float liqPrice;
+        float remainingWallet;
+
+        pnl =
+        calculatePnL(
+        coins[i].quantity,
+        coins[i].entryPrice,
+        coins[i].currentPrice,
+        coins[i].tradeType);
+
+        pnlPercent =
+        calculateProfitPercent(
+        coins[i].entryPrice,
+        coins[i].currentPrice,
+        coins[i].leverage,
+        coins[i].tradeType);
+
+        liqPrice =
+        liquidationPrice(
+        coins[i].entryPrice,
+        coins[i].quantity,
+        coins[i].walletBalance,
+        coins[i].leverage,
+        coins[i].leverageType);
+
+        remainingWallet =
+        coins[i].walletBalance + pnl;
+
+        if(remainingWallet < 0)
         {
-            float pnl;
-            float pnlPercent;
-            float liqPrice;
-            float remainingWallet;
+            remainingWallet = 0;
+        }
 
-            pnl =
-            calculatePnL(
-            coins[i].quantity,
-            coins[i].entryPrice,
-            coins[i].currentPrice,
-            coins[i].tradeType);
+        cout << endl;
+        cout << "Coin #" << i + 1
+             << endl;
 
-            pnlPercent =
-            calculateProfitPercent(
-            coins[i].entryPrice,
-            coins[i].currentPrice,
-            coins[i].leverage,
-            coins[i].tradeType);
+        cout << "Coin Name: "
+             << coins[i].name
+             << endl;
 
-            liqPrice =
-            liquidationPrice(
-            coins[i].entryPrice,
-            coins[i].quantity,
-            coins[i].walletBalance,
-            coins[i].leverage,
-            coins[i].leverageType);
+        cout << "Trade Type: "
+             << coins[i].tradeType
+             << endl;
 
-            remainingWallet =
-            coins[i].walletBalance + pnl;
+        cout << "Wallet Balance: $"
+             << coins[i].walletBalance
+             << endl;
 
-            if(remainingWallet < 0)
-            {
-                remainingWallet = 0;
-            }
+        cout << "Remaining Wallet Balance: $"
+             << remainingWallet
+             << endl;
 
-            cout << endl;
-            cout << "Coin Found!"
-                 << endl;
+        cout << "Position Cost: $"
+             << coins[i].cost
+             << endl;
 
-            cout << "Coin Name: "
-                 << coins[i].name
-                 << endl;
+        cout << "Quantity: "
+             << coins[i].quantity
+             << endl;
 
-            cout << "Trade Type: "
-                 << coins[i].tradeType
-                 << endl;
+        cout << "Entry Price: $"
+             << coins[i].entryPrice
+             << endl;
 
-            cout << "Wallet Balance: $"
-                 << coins[i].walletBalance
-                 << endl;
+        cout << "Current Price: $"
+             << coins[i].currentPrice
+             << endl;
 
-            cout << "Remaining Wallet Balance: $"
-                 << remainingWallet
-                 << endl;
+        cout << "Leverage: "
+             << coins[i].leverage
+             << "x" << endl;
 
-            cout << "Position Cost: $"
-                 << coins[i].cost
-                 << endl;
+        cout << "Leverage Type: "
+             << coins[i].leverageType
+             << endl;
 
-            cout << "Quantity: "
-                 << coins[i].quantity
-                 << endl;
+        cout << "Liquidation Price: $"
+             << liqPrice
+             << endl;
 
-            cout << "Entry Price: $"
-                 << coins[i].entryPrice
-                 << endl;
-
-            cout << "Current Price: $"
-                 << coins[i].currentPrice
-                 << endl;
-
-            cout << "Leverage: "
-                 << coins[i].leverage
-                 << "x" << endl;
-
-            cout << "Leverage Type: "
-                 << coins[i].leverageType
-                 << endl;
-
-            cout << "Liquidation Price: $"
-                 << liqPrice
-                 << endl;
-
-            cout << "PnL: $"
+        if(pnl > 0)
+        {
+            cout << "Profit: +$"
                  << pnl
                  << endl;
 
-            cout << "PnL Percentage: "
+            cout << "Profit Percentage: +"
                  << pnlPercent
                  << "%"
                  << endl;
-
-            found = true;
         }
-    }
+        else if(pnl < 0)
+        {
+            cout << "Loss: $"
+                 << pnl
+                 << endl;
 
-    if(found == false)
-    {
-        cout << endl;
-        cout << "Coin Not Found!"
-             << endl;
+            cout << "Loss Percentage: "
+                 << pnlPercent
+                 << "%"
+                 << endl;
+        }
+        else
+        {
+            cout << "No Profit No Loss"
+                 << endl;
+        }
     }
 }
