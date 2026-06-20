@@ -561,3 +561,22 @@ file << "PnL Percentage: "
      << endl;
 
 file.close();
+ifstream file("portfolio.txt");
+
+if(!file)
+{
+    cout << "Error Opening File!"
+         << endl;
+
+    return;
+}
+
+string line;
+
+while(getline(file, line))
+{
+    cout << line
+         << endl;
+}
+
+file.close();
