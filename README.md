@@ -580,3 +580,5 @@ while(getline(file, line))
 }
 
 file.close();
+ofstream file("portfolio.txt",
+              ios::app);
