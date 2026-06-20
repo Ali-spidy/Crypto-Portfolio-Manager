@@ -197,3 +197,22 @@ void viewPortfolio(Crypto *coins, int x)
         }
     }
 }
+void totalPortfolioValue(Crypto *coins,
+                         int x)
+{
+    float total = 0;
+
+    for(int i = 0; i < x; i++)
+    {
+        total =
+        total +
+        (coins[i].quantity
+        *
+        coins[i].currentPrice);
+    }
+
+    cout << endl;
+    cout << "Total Portfolio Value: $"
+         << total
+         << endl;
+}
