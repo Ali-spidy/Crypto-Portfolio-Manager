@@ -13,8 +13,6 @@ struct Crypto
     string tradeType;
 };
 
-
-//fucntions for adding coin
 void addCoin(Crypto *coins, int &x)
 {
     if(x >= 100)
