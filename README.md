@@ -511,3 +511,53 @@ int main()
 
     return 0;
 }
+ofstream file("portfolio.txt",
+              ios::app);
+
+file << "Coin: "
+     << coin.name
+     << endl;
+
+file << "Wallet Balance: $"
+     << coin.walletBalance
+     << endl;
+
+file << "Margin Used: $"
+     << coin.margin
+     << endl;
+
+file << "Entry Price: $"
+     << coin.entryPrice
+     << endl;
+
+file << "Current Price: $"
+     << coin.currentPrice
+     << endl;
+
+file << "Leverage: "
+     << coin.leverage
+     << "x"
+     << endl;
+
+file << "Leverage Type: "
+     << coin.leverageType
+     << endl;
+
+file << "Trade Type: "
+     << coin.tradeType
+     << endl;
+
+file << "Position Size: "
+     << coin.quantity
+     << endl;
+
+file << "PnL: $"
+     << pnl
+     << endl;
+
+file << "PnL Percentage: "
+     << pnlPercent
+     << "%"
+     << endl;
+
+file.close();
